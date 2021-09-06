@@ -1,5 +1,6 @@
 import getLastEvent from '../utils/getLastEvent'
 import getSelector from '../utils/getSelector'
+import tracker from '../utils/tracker'
 
 export const injectJsError = ()=>{
   //监听全局未捕获的错误
@@ -23,7 +24,10 @@ export const injectJsError = ()=>{
       selector: lastEvent?getSelector(lastEvent.path):''//代表最后一个操作的元素
       
     }
-    console.log('log',log)
+
+    // 上报服务器
+    tracker.send(log)
+    // console.log('log',log)
 
   })
 
