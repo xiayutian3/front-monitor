@@ -6,7 +6,7 @@ let logStore = 'monitor-store'
 function getExtraData() {
   return {
     title: document.title, //标题
-    url:location.url, //地址
+    url:location.href, //地址
     timestamp:Date.now(), //时间戳
     userAgent: userAgent.parse(navigator.userAgent),//浏览器的信息
     //用户id token 等。。。
@@ -31,7 +31,7 @@ class SendTracker{
         log[key] = log[key]+''
       }
     }
-    console.log('log: ', log);
+    // console.log('log: ', log);
     // let body = JSON.stringify(log)
     //阿里云格式要求
     let body = JSON.stringify({

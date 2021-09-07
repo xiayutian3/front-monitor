@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 资源加载错误 -->
+  <!-- <link rel="stylesheet" href="someerror.css"> -->
+  
   <title>前端监控sdk</title>
 </head>
 <body>
@@ -14,10 +17,27 @@
     </div>
   </div>
   <script>
+    // js报错
     function errorClick() {
       window.someVar.error = 'error'
     }
+
+    // promise报错
+    function promiseErrorClick(){
+      new Promise(function(resolve,reject){
+        window.someVar.error = 'error'
+        //或者
+        // reject('error')
+      })
+
+    // 能捕获promise的异常
+      // .catch(err=>{
+      //   console.log('err: ', err);
+      // })
+    }
   </script>
+    <!-- 资源加载错误 -->
+  <script src="someerror.js"></script>
   
 </body>
 </html>
