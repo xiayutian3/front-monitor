@@ -14,8 +14,15 @@ function getSelectors(path) {
   }).join(' ')
 }
 
-export default function (path) {
-  if (Array.isArray(path)) {
+export default function (pathOrTarget) {
+  if (Array.isArray(pathOrTarget)) { //可能是一个数组
+    return getSelectors(pathOrTarget)
+  }else{//也有可能是一个对象
+    let path = []
+    while(pathOrTarget){
+      path.push(pathOrTarget)
+      pathOrTarget = pathOrTarget.parentNode
+    }
     return getSelectors(path)
   }
 }

@@ -5,7 +5,7 @@ import tracker from '../utils/tracker'
 export const injectJsError = ()=>{
   //监听全局未捕获的错误（js error 错误）
   window.addEventListener('error',function(event){//错误事件对象
-    console.log('event123: ', event);
+    // console.log('event123: ', event);
 
     let lastEvent = getLastEvent() //最后一个交互事件
     // console.log('lastEvent: ', lastEvent);
@@ -19,9 +19,9 @@ export const injectJsError = ()=>{
         errorType:'resourceError', //js css 资源加载错误
         filename:event.target.src || event.target.href, //那个文件报错了
         tagName:event.target.tagName,// script  link 标签
-        stack: getLines(event.error.stack), //获取错误堆栈信息
+        // stack: getLines(event.error.stack), //获取错误堆栈信息
         // body div#container div.content input
-        selector: lastEvent?getSelector(lastEvent.path):''//代表最后一个操作的元素
+        selector: getSelector(event.target)//代表最后一个操作的元素
         
       }
 
@@ -48,7 +48,7 @@ export const injectJsError = ()=>{
 
     // 上报服务器
     tracker.send(log)
-    // console.log('log',log)
+    console.log('log',log)
 
   },true)
 
