@@ -10,6 +10,7 @@ export const injectJsError = ()=>{
     let lastEvent = getLastEvent() //最后一个交互事件
     // console.log('lastEvent: ', lastEvent);
     let log 
+    console.log('资源404')
 
     //说明是js link 加载错误
     if(event.target && (event.target.src || event.target.link)){
@@ -48,7 +49,7 @@ export const injectJsError = ()=>{
 
     // 上报服务器
     tracker.send(log)
-    console.log('log',log)
+    // console.log('log',log)
 
   },true)
 
