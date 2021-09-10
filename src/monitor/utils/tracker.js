@@ -31,7 +31,7 @@ class SendTracker{
         log[key] = log[key]+''
       }
     }
-    // console.log('log: ', log);
+    console.log('log: ', log);
     // let body = JSON.stringify(log)
     //阿里云格式要求
     let body = JSON.stringify({

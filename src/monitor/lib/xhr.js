@@ -1,11 +1,14 @@
 import tracker from '../utils/tracker'
+
+//监控请求
+
 //增强请求，拦截请求
 export default function injectXHR() {
   let XMLHttpRequest = window.XMLHttpRequest
   //重写 open方法
   let oldOpen = XMLHttpRequest.prototype.open
   XMLHttpRequest.prototype.open = function (method, url,async) {
-    if(!url.match(/logstores/)){ //如果是监听url是请求阿里云上报地址的会，就不添加日志
+    if(!url.match(/logstores/) && !url.match(/sockjs-node/) ){ //如果是监听url是请求阿里云上报地址的会，和webpack心跳检测的一些东西，就不添加日志
       this.logData = {
         method,
         url,
@@ -16,12 +19,13 @@ export default function injectXHR() {
     return oldOpen.apply(this, arguments)
   }
 
-  //重写 send方法
+  //重写 send方法  (请求时间监控)
   let oldSend = XMLHttpRequest.prototype.send
   XMLHttpRequest.prototype.send = function (body) {
     if(this.logData){
       let startTime = Date.now() //在发送之前记录一下开始时间
       let handler = (type) => (event)=>{
+        // console.log('type: ', type);
         let duration = Date.now() - startTime
         let status = this.status;
         let statusText = this.statusText //200  500 
