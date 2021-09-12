@@ -78,6 +78,17 @@
   </script>
     <!-- 资源加载错误 -->
   <!-- <script src="someerror.js"></script> -->
+
+  <script>
+    //加载时间指标   domContentLoadedTime: "1000" 时间
+    // dom解析完成，即使依兰的资源没有加载完成，也会触发这个事件
+    document.addEventListener('DOMContentLoaded',()=>{
+      let start = new Date()
+      while((Date.now()-start) <1000){
+        //do something
+      }
+    })
+  </script>
   
 </body>
 </html>

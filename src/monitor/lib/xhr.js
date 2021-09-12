@@ -20,10 +20,13 @@ export default function injectXHR() {
   }
 
   //重写 send方法  (请求时间监控)
+  // axios 背后的原理有两种， browser XMLHttpRequest  node环境  http
   let oldSend = XMLHttpRequest.prototype.send
   XMLHttpRequest.prototype.send = function (body) {
     if(this.logData){
       let startTime = Date.now() //在发送之前记录一下开始时间
+      //XMLHttpRequest readyState 0 1 2 3 4
+      //status 2xx 304 成功 其他 就是失败
       let handler = (type) => (event)=>{
         // console.log('type: ', type);
         let duration = Date.now() - startTime
