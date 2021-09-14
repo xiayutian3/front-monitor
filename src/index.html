@@ -11,8 +11,15 @@
 </head>
 <body>
   <div id="container">
-    <!-- 白屏监控 -->
-    <div class="content">xxxx</div>
+    <!-- FMP -->
+    <div class="content">
+      <P style="color: red;">hello</P>
+      <button id="clickbtn" onclick="clickme()">点我</button>
+    </div>
+
+
+    <!-- 白屏监控
+    <div class="content">xxxx</div> -->
 
     <!-- js error  Promise错误  ajax成功请求  ajax失败请求 -->
     <!-- <div class="content">
@@ -89,6 +96,26 @@
       }
     })
   </script>
+
+  <script>
+    //FID 首次输入延时
+    function clickme() {
+      let start = new Date()
+      while((Date.now()-start)<1000){}
+    }
+    // FMP
+    //添加 有意义内容指标
+    setTimeout(()=>{
+      let content = document.getElementsByClassName('content')[0]
+      let h1 = document.createElement('h1')
+      h1.innerHTML = '我是这个页面最有意义的内容'
+      //设定有意义的内容，浏览器才能捕获到 FMP
+      h1.setAttribute('elementtiming','meaningful')
+      content.appendChild(h1)
+    },2000)
+  </script>
+
+
   
 </body>
 </html>
